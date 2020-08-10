@@ -7,6 +7,8 @@ import com.example.mentionview.suggestions.SuggestionsResult
 import com.example.mentionview.tokenization.QueryToken
 import com.example.mentionview.tokenization.interfaces.QueryTokenReceiver
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.editor
+import kotlinx.android.synthetic.main.simple_mentions.*
 
 class MainActivity : AppCompatActivity(), QueryTokenReceiver {
 
@@ -22,6 +24,9 @@ class MainActivity : AppCompatActivity(), QueryTokenReceiver {
         editor.setQueryTokenReceiver(this)
         editor.setHint(resources.getString(R.string.type_city))
         cities = City.CityLoader(resources)
+
+        editor.setMyList(listView)
+
     }
 
     override fun onQueryReceived(queryToken: QueryToken): List<String> {

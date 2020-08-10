@@ -4,22 +4,19 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#BDBDBD"
-        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/simple_mentions_description"/>
-
-    </LinearLayout>
 
     <com.example.mentionview.ui.RichEditorView
         android:id="@+id/editor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:minHeight="150dp"/>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_below="@+id/text_editor"
+        android:visibility="visible"/>
 </LinearLayout>

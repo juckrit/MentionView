@@ -4,7 +4,7 @@
              android:layout_height="match_parent"
              >
 
-    <RichEditorView
+    <com.example.mentionview.ui.RichEditorView
         android:id="@+id/rich_editor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
