@@ -74,15 +74,20 @@ class RichEditorView : RelativeLayout, TextWatcher, QueryTokenReceiver, Suggesti
     private lateinit var myList: ListView
     private var myAdapter: SuggestionsAdapter? = null
 
-    fun setMyList(listView: ListView){
+    fun setMyList(listView: ListView) {
         myList = listView
         myList.adapter = myAdapter
-
+        myList.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
+            val mention = mSuggestionsAdapter!!.getItem(position) as Mentionable
+            if (mMentionsEditText != null) {
+                mMentionsEditText!!.insertMention(mention)
+                mSuggestionsAdapter!!.clear()
+            }
+        })
     }
 
-    fun setMyAdapter(adapter: SuggestionsAdapter){
+    fun setMyAdapter(adapter: SuggestionsAdapter) {
     }
-
 
 
     private lateinit var mMentionsEditText: MentionsEditText
@@ -173,6 +178,7 @@ class RichEditorView : RelativeLayout, TextWatcher, QueryTokenReceiver, Suggesti
                 mSuggestionsAdapter!!.clear()
             }
         })
+
 
         // Display and update the editor text counter (starts it at 0)
         updateEditorTextCount()
@@ -361,7 +367,7 @@ class RichEditorView : RelativeLayout, TextWatcher, QueryTokenReceiver, Suggesti
                 mWaitingForFirstResult = false
             }
 
-            if (myAdapter!=null&&myList!=null){
+            if (myAdapter != null && myList != null) {
                 myAdapter!!.addSuggestions(result, bucket, mMentionsEditText!!)
                 myList!!.setSelection(0)
             }
@@ -385,6 +391,7 @@ class RichEditorView : RelativeLayout, TextWatcher, QueryTokenReceiver, Suggesti
             disableSpellingSuggestions(true)
             mTextCounterView!!.visibility = View.GONE
             mSuggestionsList!!.visibility = View.VISIBLE
+            myList!!.visibility = View.VISIBLE
             mPrevEditTextParams = mMentionsEditText!!.layoutParams
             mPrevEditTextBottomPadding = mMentionsEditText!!.paddingBottom
             mMentionsEditText!!.setPadding(
@@ -414,6 +421,7 @@ class RichEditorView : RelativeLayout, TextWatcher, QueryTokenReceiver, Suggesti
             disableSpellingSuggestions(false)
             mTextCounterView!!.visibility = if (mDisplayTextCount) View.VISIBLE else View.GONE
             mSuggestionsList!!.visibility = View.GONE
+            myList!!.visibility = View.GONE
             mMentionsEditText!!.setPadding(
                 mMentionsEditText!!.paddingLeft,
                 mMentionsEditText!!.paddingTop,
@@ -441,7 +449,10 @@ class RichEditorView : RelativeLayout, TextWatcher, QueryTokenReceiver, Suggesti
      * {@inheritDoc}
      */
     override val isDisplayingSuggestions: Boolean
-        get() = mSuggestionsList!!.visibility == View.VISIBLE
+        get() =
+            mSuggestionsList!!.visibility == View.VISIBLE &&
+                    myList!!.visibility == View.VISIBLE
+
 
     /**
      * Disables spelling suggestions from the user's keyboard.
