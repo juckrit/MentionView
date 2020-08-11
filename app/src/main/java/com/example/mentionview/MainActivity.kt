@@ -8,7 +8,6 @@ import com.example.mentionview.tokenization.QueryToken
 import com.example.mentionview.tokenization.interfaces.QueryTokenReceiver
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.editor
-import kotlinx.android.synthetic.main.simple_mentions.*
 
 class MainActivity : AppCompatActivity(), QueryTokenReceiver {
 
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity(), QueryTokenReceiver {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.simple_mentions)
+        setContentView(R.layout.activity_main)
 
         editor.displayTextCounter(false)
         editor.setQueryTokenReceiver(this)

@@ -25,9 +25,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ListView
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.mentionview.R
 import com.example.mentionview.mentions.MentionSpan
 import com.example.mentionview.mentions.MentionSpanConfig
@@ -68,7 +68,7 @@ import java.util.*
  * @attr ref R.styleable#RichEditorView_selectedMentionTextColor
  * @attr ref R.styleable#RichEditorView_selectedMentionTextBackgroundColor
  */
-class RichEditorView : RelativeLayout, TextWatcher, QueryTokenReceiver, SuggestionsResultListener,
+class RichEditorView : ConstraintLayout, TextWatcher, QueryTokenReceiver, SuggestionsResultListener,
     SuggestionsVisibilityManager {
 
     private lateinit var myList: ListView
